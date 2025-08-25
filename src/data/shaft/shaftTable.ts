@@ -1,16 +1,18 @@
-import { getITIndex } from '../../calculos/faixaIT.ts';
+import { getITIndex } from '../../calculations/rangeIT.ts';
 
-interface Intervalo {
+// Critério de busca
+interface Range {
     min: number;
     max: number;
-    E: number | ((nivel: number) => number); // Valor de afastamento em mm
+    E: number | ((level: number) => number); // Clearance value in mm
 }
 
-interface tabelaPorLetra {
-    [letra: string]: Intervalo[];
+interface TableByLetter {
+    [letter: string]: Range[];
 }
 
-const tabelaAfastamentosFuro: tabelaPorLetra = {
+// Tabela com os valores referentes a afastamentos
+const shaftClearanceTable: TableByLetter = {
 
     d: [
         { min: 0, max: 3, E: -20 },
@@ -86,24 +88,24 @@ const tabelaAfastamentosFuro: tabelaPorLetra = {
         { min: 0, max: 500, E: 0 }
     ],
     j: [
-        { min: 0, max: 3, E: nivel => getITIndex(nivel) > 6 ? -4 : -2 },
-        { min: 3, max: 6, E: nivel => getITIndex(nivel) > 6 ? -6 : -3 },
-        { min: 6, max: 10, E: nivel => getITIndex(nivel) > 6 ? -8 : -5 }
+        { min: 0, max: 3, E: level => getITIndex(level) > 6 ? -4 : -2 },
+        { min: 3, max: 6, E: level => getITIndex(level) > 6 ? -6 : -3 },
+        { min: 6, max: 10, E: level => getITIndex(level) > 6 ? -8 : -5 }
     ],
     k: [
-        { min: 0, max: 3, E: nivel => getITIndex(nivel) > 4 && getITIndex(nivel) < 7 ? 0 : 0 },
-        { min: 3, max: 6, E: nivel => getITIndex(nivel) > 4 && getITIndex(nivel) < 7 ? 1 : 0 },
-        { min: 6, max: 10, E: nivel => getITIndex(nivel) > 4 && getITIndex(nivel) < 7 ? 1 : 0 },
-        { min: 10, max: 18, E: nivel => getITIndex(nivel) > 4 && getITIndex(nivel) < 7 ? 1 : 0 },
-        { min: 18, max: 30, E: nivel => getITIndex(nivel) > 4 && getITIndex(nivel) < 7 ? 2 : 0 },
-        { min: 30, max: 50, E: nivel => getITIndex(nivel) > 4 && getITIndex(nivel) < 7 ? 2 : 0 },
-        { min: 50, max: 80, E: nivel => getITIndex(nivel) > 4 && getITIndex(nivel) < 7 ? 2 : 0 },
-        { min: 80, max: 120, E: nivel => getITIndex(nivel) > 4 && getITIndex(nivel) < 7 ? 3 : 0 },
-        { min: 120, max: 180, E: nivel => getITIndex(nivel) > 4 && getITIndex(nivel) < 7 ? 3 : 0 },
-        { min: 180, max: 250, E: nivel => getITIndex(nivel) > 4 && getITIndex(nivel) < 7 ? 4 : 0 },
-        { min: 250, max: 315, E: nivel => getITIndex(nivel) > 4 && getITIndex(nivel) < 7 ? 4 : 0 },
-        { min: 315, max: 400, E: nivel => getITIndex(nivel) > 4 && getITIndex(nivel) < 7 ? 4 : 0 },
-        { min: 400, max: 500, E: nivel => getITIndex(nivel) > 4 && getITIndex(nivel) < 7 ? 5 : 0 }
+        { min: 0, max: 3, E: level => getITIndex(level) > 4 && getITIndex(level) < 7 ? 0 : 0 },
+        { min: 3, max: 6, E: level => getITIndex(level) > 4 && getITIndex(level) < 7 ? 1 : 0 },
+        { min: 6, max: 10, E: level => getITIndex(level) > 4 && getITIndex(level) < 7 ? 1 : 0 },
+        { min: 10, max: 18, E: level => getITIndex(level) > 4 && getITIndex(level) < 7 ? 1 : 0 },
+        { min: 18, max: 30, E: level => getITIndex(level) > 4 && getITIndex(level) < 7 ? 2 : 0 },
+        { min: 30, max: 50, E: level => getITIndex(level) > 4 && getITIndex(level) < 7 ? 2 : 0 },
+        { min: 50, max: 80, E: level => getITIndex(level) > 4 && getITIndex(level) < 7 ? 2 : 0 },
+        { min: 80, max: 120, E: level => getITIndex(level) > 4 && getITIndex(level) < 7 ? 3 : 0 },
+        { min: 120, max: 180, E: level => getITIndex(level) > 4 && getITIndex(level) < 7 ? 3 : 0 },
+        { min: 180, max: 250, E: level => getITIndex(level) > 4 && getITIndex(level) < 7 ? 4 : 0 },
+        { min: 250, max: 315, E: level => getITIndex(level) > 4 && getITIndex(level) < 7 ? 4 : 0 },
+        { min: 315, max: 400, E: level => getITIndex(level) > 4 && getITIndex(level) < 7 ? 4 : 0 },
+        { min: 400, max: 500, E: level => getITIndex(level) > 4 && getITIndex(level) < 7 ? 5 : 0 }
     ],
     m: [
         { min: 0, max: 3, E: 2 },
@@ -223,4 +225,4 @@ const tabelaAfastamentosFuro: tabelaPorLetra = {
     ]
 };
 
-export default tabelaAfastamentosFuro;
+export default shaftClearanceTable;

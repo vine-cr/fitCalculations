@@ -1,10 +1,10 @@
-interface FaixaIT {
+interface ITRange {
     min: number;
     max: number;
-    IT: number[]; // IT1 a IT18
+    IT: number[]; // IT1 to IT18
 }
 
-export const tabelaIT: FaixaIT[] = [
+export const ITTable: ITRange[] = [
     { min: 0, max: 3, IT: [4, 6, 10, 14, 25, 40, 60] },
     { min: 3, max: 6, IT: [5, 8, 12, 18, 30, 48, 75]},
     { min: 6, max: 10, IT: [6, 9, 12, 18, 30, 48, 75]},
@@ -20,18 +20,18 @@ export const tabelaIT: FaixaIT[] = [
     { min: 400, max: 500, IT: [27, 40, 63, 97, 155, 250, 400]},
 ];
 
-export function getIT(nominal: number, nivel: number): number {
-    if (nivel < 5 || nivel > 11) throw new Error("Nível IT inválido (1 a 18).");
+export function getIT(nominal: number, level: number): number {
+    if (level < 5 || level > 11) throw new Error("Invalid IT level (1 to 18).");
 
-    const faixa = tabelaIT.find(f => nominal > f.min && nominal <= f.max);
-    if (!faixa) throw new Error(`Nominal ${nominal}mm fora do intervalo da tabela IT.`);
+    const range = ITTable.find(r => nominal > r.min && nominal <= r.max);
+    if (!range) throw new Error(`Nominal ${nominal}mm out of IT table range.`);
 
-    return faixa.IT[nivel - 5];
+    return range.IT[level - 5];
 }
 
-export function getITIndex(nivel: number): number {
-    if (nivel < 5 || nivel > 11) throw new Error("Nível IT não é suportado (1 a 18).");
-    return nivel - 5;
+export function getITIndex(level: number): number {
+    if (level < 5 || level > 11) throw new Error("IT level not supported (5 to 11).");
+    return level - 5;
 }
 
 
